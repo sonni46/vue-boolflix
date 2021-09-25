@@ -1,24 +1,26 @@
 <template>
   <div class="main">
-      <movies :movies="movies"/>
+      <Movies :movies="movies"/>
+      <Tv :tvs="tvs"/>
   </div>
 </template>
 
 <script>
 import Movies from './Movies.vue'
+import Tv from './Tv.vue'
 export default {
     name:"Main",
-    computed : {
-        Movies
+    components : {
+        Movies,
+        Tv
     },
-    props : ["movies"]
-
+    props : ["movies","tvs"]
 }
 </script>
 
 
-<style>
+<style scoped lang="scss">
 @import "@/style/General";
-@import "@/style/Utilitis";
+@import "@/style/Utilitis"; 
 
 </style>

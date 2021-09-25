@@ -1,40 +1,29 @@
 <template>
   <div class="d-flex mt-5 scroll">
-      <div class="col-2" v-for="(movi,index) in movies" :key="index">
+      <div class="col-2" v-for="(tv,index) in tvs" :key="index">
         <!-- <img :src="`https://image.tmdb.org/t/p/w300${movi.poster_path}`" alt=""> -->
         <div class="info bg-dark white ms-4">
-          <h3>{{movi.title}}</h3>
-          <h4>{{movi.original_title}}</h4>
-          <CountryFlag :country='movi.original_language' size='normal'/>
-          <h4>{{movi.vote_average}}</h4>
+          <h3>{{tv.name}}</h3>
+          <h4>{{tv.original_name}}</h4>
+          <CountryFlag :country='tv.original_language' size='normal'/>
+          <h4>{{tv.vote_average}}</h4>
           <div class="overview">
-            <h4>{{movi.overview}}</h4>
+            <h4>{{tv.overview}}</h4>
           </div>
         </div>
       </div>
   </div>
 </template>
+
 <script>
-import CountryFlag from 'vue-country-flag'
 export default {
-    name : 'Movies',
-    components :{
-      CountryFlag
-    },
-    props : ["movies"],
-    data() {
+    name:"Tv",
+    props:["tvs"],
 
-    },
-    methods: {
-
-    },
 }
 </script>
 
-<style scoped lang="scss">
-@import "@/style/General";
-@import "@/style/Utilitis";  
-
+<style  scoped lang="scss">
 .scroll {
     overflow: scroll;
     font-size: 20px;
@@ -58,7 +47,6 @@ export default {
         height: 0;
         background:transparent;
       }
-
 }
 
 .white {
