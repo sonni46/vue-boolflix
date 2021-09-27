@@ -6,7 +6,9 @@
           <h3>{{movi.title}}</h3>
           <h4>{{movi.original_title}}</h4>
           <CountryFlag :country='movi.original_language' size='normal'/>
-          <h4>{{movi.vote_average}}</h4>
+          <div class="ms-2">
+            <i v-for="(star,index) in starCounter " :key="index" class="fas fa-star" :class="calc(movi.vote_average,star)"></i>
+          </div>
           <div class="overview">
             <h4>{{movi.overview}}</h4>
           </div>
@@ -23,10 +25,20 @@ export default {
     },
     props : ["movies"],
     data() {
-
+      return{
+         starCounter: 5
+      }
     },
     methods: {
-
+      calc(info,i) {
+        info = info / 2;
+        Math.floor(info)
+        console.log(info)
+        if(i <= info){
+          return 'yellow'
+        }
+        return false
+      },
     },
 }
 </script>
@@ -63,6 +75,10 @@ export default {
 
 .white {
   color: white;
+}
+
+.yellow {
+  color: yellow;
 }
 
 .scroll::-webkit-scrollbar {
