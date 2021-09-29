@@ -1,26 +1,28 @@
 <template>
-  <div class="myCard d-flex mt-5 scroll flip-card">
-      <div class="col-2 mx-5 my-3 flip-card-inner" v-for="(tv,index) in tvs" :key="index">
-        <div class="flip-card-front">
-          <div v-if="tv.poster_path">
-            <img :src="`https://image.tmdb.org/t/p/w300${tv.poster_path}`" alt="">
+  <div class="d-flex scroll ">
+    <div class="col-2 mt-5 mx-5 my-3 flip-card" v-for="(tv,index) in tvs" :key="index">
+       <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div v-if="tv.poster_path">
+              <img :src="`https://image.tmdb.org/t/p/w300${tv.poster_path}`" alt="">
+            </div>
+            <div class="error" v-else>
+              <img :src="require(`../assets/img/thumb.jpg`)" alt="">
+            </div>
           </div>
-          <div class="error" v-else>
-            <img :src="require(`../assets/img/thumb.jpg`)" alt="">
+          <div class="info bg-dark white ms-4 flip-card-back">
+            <h3>{{tv.name}}</h3>
+            <h4>{{tv.original_name}}</h4>
+            <CountryFlag :country='language(tv.original_language)' size='normal'/>
+            <div class="ms-2">
+              <i v-for="(star,index) in starCounter " :key="index" class="fas fa-star" :class="calc(tv.vote_average,star)"></i>
+            </div>
+            <div class="overview">
+              <h4>{{tv.overview}}</h4>
+            </div>
           </div>
         </div>
-        <div class="info bg-dark white ms-4 flip-card-back">
-          <h3>{{tv.name}}</h3>
-          <h4>{{tv.original_name}}</h4>
-          <CountryFlag :country='language(tv.original_language)' size='normal'/>
-          <div class="ms-2">
-            <i v-for="(star,index) in starCounter " :key="index" class="fas fa-star" :class="calc(tv.vote_average,star)"></i>
-          </div>
-          <div class="overview">
-            <h4>{{tv.overview}}</h4>
-          </div>
-        </div>
-      </div>
+    </div>
   </div>
 </template>
 
@@ -108,7 +110,7 @@ export default {
 
 .flip-card {
   background-color: transparent;
-  width: 100%;
+  width: 15%;
   height: 500px;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }

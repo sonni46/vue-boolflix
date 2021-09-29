@@ -1,22 +1,29 @@
 <template>
-  <div class="d-flex mt-4 scroll flip-card">
-      <div class="col-2 mx-5 flip-card-inner" v-for="(movi,index) in movies" :key="index">
-        <div class="flip-card-front">
-          <img :src="`https://image.tmdb.org/t/p/w300${movi.poster_path}`" alt="">
-        </div>
-        <div class="info bg-dark white ms-4 flip-card-back">
-          <h3>{{movi.title}}</h3>
-          <h4>{{movi.original_title}}</h4>
-          <CountryFlag :country='movi.original_language' size='normal'/>
-          <div class="ms-2">
-            <i v-for="(star,index) in starCounter " :key="index" class="fas fa-star" :class="calc(movi.vote_average,star)"></i>
+    <div class="scroll d-flex">
+      <div class="col-2 mx-5 mt-4 flip-card " v-for="(movi,index) in movies" :key="index">
+        <div class=" flip-card-inner">
+          <div class="flip-card-front">
+            <div v-if="movi.poster_path">
+              <img :src="`https://image.tmdb.org/t/p/w300${movi.poster_path}`" alt="">
+            </div>
+            <div class="error" v-else>
+              <img :src="require(`../assets/img/thumb.jpg`)" alt="">
+            </div>
           </div>
-          <div class="overview">
-            <h4>{{movi.overview}}</h4>
+          <div class="info bg-dark white ms-4 flip-card-back">
+            <h3>{{movi.title}}</h3>
+            <h4>{{movi.original_title}}</h4>
+            <CountryFlag :country='movi.original_language' size='normal'/>
+            <div class="ms-2">
+              <i v-for="(star,index) in starCounter " :key="index" class="fas fa-star" :class="calc(movi.vote_average,star)"></i>
+            </div>
+            <div class="overview">
+              <h4>{{movi.overview}}</h4>
+            </div>
           </div>
         </div>
       </div>
-  </div>
+    </div>
 </template>
 <script>
 import CountryFlag from 'vue-country-flag'
@@ -91,9 +98,9 @@ export default {
 
 .flip-card {
   background-color: transparent;
-  width: 100%;
+  width: 15%;
   height: 500px;
-  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  // perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
 /* This container is needed to position the front and back side */
